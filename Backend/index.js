@@ -26,6 +26,60 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+//----------------------------Conteúdo da Rota Raiz------------------------------
+
+app.get('/',(req, res) => {
+    const conteudo = `<!DOCTYPE html>
+    <html lang="pt-br">
+    
+    <head>
+        <meta charset="utf-8">
+        <title>Webservice Clínica Médica</title>
+    </head>
+    
+    <body>
+        <h1>Webservice de Clínica Médica</h1>
+        <p>Este webservice JSON didático contém um sistema de exemplo de uma clínica médica, formada por <b>pacientes</b>,
+            <b>médicos</b>, <b>especializações</b> e <b>consultas</b>.
+        </p>
+        <h2>As rotas disponíveis são:</h2>
+        <p><a href="/pacientes">/pacientes</a> suporta as seguintes operações:</p>
+        <ul>
+            <li><b>GET</b> - Retorna a lista de pacientes.</li>
+            <li><b>POST</b> - Adiciona um novo paciente. Requer parâmetros <i>nome</i> e <i>dataNascimento</i> (no formato
+                YYYY-MM-DD).</li>
+            <li><b>PUT</b> - Edita um paciente. Requer parâmetros <i>id</i>, <i>nome</i> e <i>dataNascimento</i> (no formato
+                YYYY-MM-DD).</li>
+            <li><b>DELETE</b> - Remove um paciente. Requer parâmetro <i>id</i> (do tipo GET).</li>
+        </ul>
+        <p><a href="/medicos">/medicos</a> suporta as seguintes operações:</p>
+        <ul>
+            <li><b>GET</b> - Retorna a lista de médicos.</li>
+            <li><b>POST</b> - Adiciona um novo médico. Requer parâmetros <i>nome</i> e <i>idEspecialidade</i>.</li>
+            <li><b>PUT</b> - Edita um médico. Requer parâmetros <i>id</i>, <i>nome</i> e <i>idEspecialidade</i>.</li>
+            <li><b>DELETE</b> - Remove um médico. Requer parâmetro <i>id</i> (do tipo GET).</li>
+        </ul>
+        <p><a href="/consultas">/consultas</a> suporta as seguintes operações:</p>
+        <ul>
+            <li><b>GET</b> - Retorna a lista de consultas.</li>
+            <li><b>POST</b> - Adiciona uma nova consulta. Requer parâmetros <i>idPaciente</i> e <i>idMedico</i> e
+                <i>data</i> (no formato YYYY-MM-DD HH:mm).
+            </li>
+            <li><b>PUT</b> - Edita uma consulta. Requer parâmetros <i>id</i>, <i>idPaciente</i> e <i>idMedico</i> e
+                <i>data</i> (no formato YYYY-MM-DD HH:mm).
+            </li>
+            <li><b>DELETE</b> - Remove uma consulta. Requer parâmetro <i>id</i> (do tipo GET).</li>
+        </ul>
+        <p><a href="/especialidades">/especialidades</a> suporta as seguintes operações:</p>
+        <ul>
+            <li><b>GET</b> - Retorna a lista de especialidades.</li>
+        </ul>
+    </body>
+    
+    </html>`
+    res.send(conteudo);
+})
+
 //--------------------------------Rotas Paciente---------------------------------
 
 app.get('/pacientes',(req, res) => {        //rota para obtenção de pacientes
