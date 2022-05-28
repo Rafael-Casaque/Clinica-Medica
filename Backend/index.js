@@ -26,5 +26,202 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+//--------------------------------Rotas Paciente---------------------------------
+
+app.get('/pacientes',(req, res) => {        //rota para obtenção de pacientes
+    const pacientesDB = require('./pacientes');
+    res.send(pacientesDB);
+})
+
+app.post('/pacientes',(req, res) => {       //rota para cadastramento de pacientes
+    let pacientesDB = require('./pacientes');
+    let ultimoID = require('./ultimoID');
+    const date = new Date();
+    const data = {
+        "id": ultimoID[0].id+1,
+        "nome": req.body.nome,
+        "dataNascimento": req.body.dataNascimento,
+        "dataCadastro": `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    };    
+    ultimoID[0].id += 1;
+    pacientesDB.push(data);
+    fs.writeFile("pacientes.json", JSON.stringify(pacientesDB), err => {
+        if (err) throw err;
+    });
+    fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
+        if (err) throw err;
+    });
+    res.sendStatus(200);    
+})
+
+app.put('/pacientes',(req, res) => {        //rota para edição de pacientes
+    let pacientesDB = require('./pacientes');    
+    const date = new Date();
+    const data = {
+        "id": req.body.id,
+        "nome": req.body.nome,
+        "dataNascimento": req.body.dataNascimento,
+        "dataCadastro": `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    };
+    for(let i = 0; i < pacientesDB.length; i++){
+        if(pacientesDB[i].id == req.body.id){
+            pacientesDB[i]=data;            
+            fs.writeFile("pacientes.json", JSON.stringify(pacientesDB), err => {
+                if (err) throw err;
+            });  
+        }
+    }
+    res.sendStatus(200);    
+})
+
+app.delete('/pacientes',(req, res) => {     //rota para exclusão de pacientes
+    let pacientesDB = require('./pacientes');
+    for(let i = 0; i < pacientesDB.length; i++){
+        if(pacientesDB[i].id == req.body.id){
+            pacientesDB.splice(i, 1);            
+            fs.writeFile("pacientes.json", JSON.stringify(pacientesDB), err => {
+                if (err) throw err;
+            });  
+        }
+    }
+    res.sendStatus(200);    
+})
+
+//---------------------------------Rotas Médico-----------------------------------
+
+app.get('/medicos',(req, res) => {        //rota para obtenção dos médicos
+    const medicosDB = require('./medicos');
+    res.send(medicosDB);
+})
+
+app.post('/medicos',(req, res) => {       //rota para cadastramento dos médicos
+    let medicosDB = require('./medicos');
+    let ultimoID = require('./ultimoID');
+    const date = new Date();
+    const data = {
+        "id": ultimoID[0].id+1,
+        "nome": req.body.nome,        
+        "dataCadastro": `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+        "idEspecialidade": req.body.idEspecialidade
+    };    
+    ultimoID[0].id += 1;
+    medicosDB.push(data);
+    fs.writeFile("medicos.json", JSON.stringify(medicosDB), err => {
+        if (err) throw err;
+    });
+    fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
+        if (err) throw err;
+    });
+    res.sendStatus(200);
+})
+
+app.put('/medicos',(req, res) => {        //rota para edição dos médicos
+    let medicosDB = require('./medicos');    
+    const date = new Date();
+    const data = {
+        "id": req.body.nome,
+        "nome": req.body.nome,        
+        "dataCadastro": `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+        "idEspecialidade": req.body.idEspecialidade
+    };
+    for(let i = 0; i < medicosDB.length; i++){
+        if(medicosDB[i].id == req.body.id){
+            medicosDB[i]=data;            
+            fs.writeFile("medicos.json", JSON.stringify(medicosDB), err => {
+                if (err) throw err;
+            });  
+        }
+    }
+    res.sendStatus(200);
+})
+
+app.delete('/medicos',(req, res) => {     //rota para exclusão dos médicos
+    let medicosDB = require('./medicos');
+    for(let i = 0; i < medicosDB.length; i++){
+        if(medicosDB[i].id == req.body.id){
+            medicosDB.splice(i, 1);            
+            fs.writeFile("medicos.json", JSON.stringify(medicosDB), err => {
+                if (err) throw err;
+            });  
+        }
+    }
+    res.sendStatus(200);
+})
+
+//---------------------------------Rotas Consultas-----------------------------------
+
+app.get('/consultas',(req, res) => {        //rota para obtenção das consultas
+    const consultasDB = require('./consultas');
+    res.send(consultasDB);
+})
+
+app.post('/consultas',(req, res) => {       //rota para cadastramento das consultas
+    let consultasDB = require('./consultas');
+    let ultimoID = require('./ultimoID');
+    const date = new Date();
+    const data = {
+        "id": ultimoID[0].id+1,
+        "idPaciente": req.body.idPaciente,                
+        "idMedico": req.body.idMedico,
+        "data": req.body.data
+    };    
+    ultimoID[0].id += 1;
+    consultasDB.push(data);
+    fs.writeFile("consultas.json", JSON.stringify(consultasDB), err => {
+        if (err) throw err;
+    });
+    fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
+        if (err) throw err;
+    });
+    res.sendStatus(200);
+})
+
+app.put('/consultas',(req, res) => {        //rota para edição das consultas
+    let consultasDB = require('./consultas');    
+    const date = new Date();
+    const data = {
+        "id": req.body.id,
+        "idPaciente": req.body.idPaciente,                
+        "idMedico": req.body.idMedico,
+        "data": req.body.data
+    };
+    for(let i = 0; i < consultasDB.length; i++){
+        if(consultasDB[i].id == req.body.id){
+            consultasDB[i]=data;            
+            fs.writeFile("consultas.json", JSON.stringify(consultasDB), err => {
+                if (err) throw err;
+            });  
+        }
+    }
+    res.sendStatus(200);
+})
+
+app.delete('/consultas',(req, res) => {     //rota para exclusão das consultas
+    let consultasDB = require('./consultas');
+    for(let i = 0; i < consultasDB.length; i++){
+        if(consultasDB[i].id == req.body.id){
+            consultasDB.splice(i, 1);            
+            fs.writeFile("consultas.json", JSON.stringify(consultasDB), err => {
+                if (err) throw err;
+            });  
+        }
+    }
+    res.sendStatus(200);
+})
+
+//--------------------------------Rotas Especialidades----------------------------------
+
+app.get('/especialidades',(req, res) => {        //rota para obtenção das especialidades
+    const especialidadesDB = require('./especialidades');
+    res.send(especialidadesDB);
+})
+
+//rota padrão para resposta 404
+
+app.use((req, res) => {
+    res.status(404);
+    res.send("página não encontrada!");
+})
+
 //define o local de escuta do servidor
 app.listen(PORT, () => console.log('Servidor inicializado na porta 3000'));
