@@ -1,1 +1,30 @@
-[]
+[
+    {
+        "id": 1,
+        "nome": "Cardiologista"
+    },
+    {
+        "id": 2,
+        "nome": "Oftalmologista"
+    },
+    {
+        "id": 3,
+        "nome": "Ortopedista"
+    },
+    {
+        "id": 4,
+        "nome": "Oncologista"
+    },
+    {
+        "id": 5,
+        "nome": "Cirurgia Geral"
+    },
+    {
+        "id": 6,
+        "nome": "Anestesista"
+    },
+    {
+        "id": 7,
+        "nome": "Psiquiatra"
+    }
+]
