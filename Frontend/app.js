@@ -1,33 +1,57 @@
+var medicos, pacietes, consultas, especialidades;
+const urlUsada = "http://localhost:3000";
+//operações :hover
+
 $(".opcoes").hide()
 
-$("#pacientes").mouseover(()=>{
+$("#loading").hide()
+
+$("#pacientes").mouseover(() => {
     $(".opcoes").eq(0).show()
-    console.log(111)
 });
 
-$("#pacientes").mouseout(()=>{
+$("#pacientes").mouseout(() => {
     $(".opcoes").eq(0).hide()
-    console.log(111)
 });
 
-$("#medicos").mouseover(()=>{
+$("#medicos").mouseover(() => {
     $(".opcoes").eq(1).show()
-    console.log(111)
 });
 
-$("#medicos").mouseout(()=>{
+$("#medicos").mouseout(() => {
     $(".opcoes").eq(1).hide()
-    console.log(111)
 });
 
-$("#pacientes").click(()=>{
+//operações ajax
 
+$("#pacientes>ul>li").eq(0).click((e) => {
+    e.preventDefault();
+    $("#loading").show()
+    $("header").hide()
+    $.get(urlUsada + "/medicos", (data) => {
+        if(data==undefined) console.log(1)
+        console.log(data);
+    }).done(()=>{
+        $("#loading").hide()
+        $("header").show()
+    })    
 });
 
-$("#medicos").click(()=>{
-
+$("#pacientes>ul>li").eq(1).click((e) => {
+    e.preventDefault();
 });
 
-$("#consultas").click(()=>{
+$("#medicos>ul>li").eq(0).click((e) => {
+    e.preventDefault();
+    $.get(urlUsada + "/medicos", (e) => {
+        console.log(e);
+    })
+});
 
+$("#medicos>ul>li").eq(1).click((e) => {
+    e.preventDefault();
+});
+
+$("#consulta").click((e) => {
+    e.preventDefault();
 });
