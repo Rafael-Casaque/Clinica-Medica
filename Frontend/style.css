@@ -1,5 +1,6 @@
 button{
     display: none;
+    border: 0;
 }
 
 #clinica {
@@ -30,9 +31,10 @@ button{
     font-weight: bold;
 }
 
-article{
+main{
     background-image: url(imgs/wallpaper.jpg);
     background-size: cover;    
+    background-position: center;
     height: 100vh;
     width: 100vw;    
 }
@@ -42,4 +44,10 @@ footer{
 }
 footer>p{
     margin: 0;
+}
+
+@media (max-width: 991px) {
+    button{        
+        display: inline-block;
+    }
 }
