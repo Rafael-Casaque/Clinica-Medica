@@ -1,5 +1,5 @@
 var medicos, pacietes, consultas, especialidades;
-const urlUsada = "http://localhost:3000";
+const urlUsada = "https://us-central1-testenodejs-9029a.cloudfunctions.net/app";
 //operações :hover
 
 $(".opcoes").hide()
@@ -28,7 +28,8 @@ $("#pacientes>ul>li").eq(0).click((e) => {
     e.preventDefault();
     $("#loading").show()
     $("header").hide()
-    $.get(urlUsada + "/medicos", (data) => {
+    //$.get(urlUsada + "/medicos", (data) => {
+    $.get(urlUsada, (data) => {
         if(data==undefined) console.log(1)
         console.log(data);
     }).done(()=>{
