@@ -173,7 +173,7 @@ app.put('/medicos',(req, res) => {        //rota para edição dos médicos
     let medicosDB = require('./medicos');    
     const date = new Date();
     const data = {
-        "id": req.body.nome,
+        "id": req.body.id,
         "nome": req.body.nome,        
         "dataCadastro": `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
         "idEspecialidade": req.body.idEspecialidade
