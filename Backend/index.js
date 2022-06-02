@@ -83,8 +83,8 @@ app.get('/',(req, res) => {
 //--------------------------------Rotas Paciente---------------------------------
 
 app.get('/pacientes',(req, res) => {        //rota para obtenção de pacientes
-    const pacientesDB = require('./pacientes');
-    res.send(pacientesDB);
+    const pacientesDb = require('./pacientes');
+    res.send(pacientesDb);
 })
 
 app.post('/pacientes',(req, res) => {       //rota para cadastramento de pacientes
@@ -166,7 +166,7 @@ app.post('/medicos',(req, res) => {       //rota para cadastramento dos médicos
     fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
         if (err) throw err;
     });
-    res.sendStatus(200);
+    res.send({"status":201});        
 })
 
 app.put('/medicos',(req, res) => {        //rota para edição dos médicos
