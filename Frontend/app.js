@@ -8,6 +8,8 @@ $("a").click((e) => {
 
 $("#pacientesForm").hide()
 
+$("#medicosForm").hide()
+
 $("aside").hide()
 
 $(".opcoes").hide()
@@ -30,8 +32,9 @@ $("#medicos").mouseout(() => {
     $(".opcoes").eq(1).hide()
 });
 
-$("#close").click(() => {
+$(".close").click(() => {
     $("#pacientesForm").hide()
+    $("#medicosForm").hide()
 });
 
 //operações ajax
@@ -71,10 +74,22 @@ $("#pacientesForm>.btn-primary").click((e) => {
                 $("#loading").hide()
                 $("header").show()
                 $("#nome").val(""),
-                $("#dataNascimento").val("")
+                    $("#dataNascimento").val("")
                 $("#modal-sucesso").show();
-                setTimeout(()=>{$("#modal-sucesso").hide("slow")},1500)
+                setTimeout(() => { $("#modal-sucesso").hide("slow") }, 1500)
             }
+            else {
+                alert(1)
+            }
+        },
+        done: function (data) {
+            console.log(data);
+        },
+        fail: function (jqXHR, textStatus, errorThrown) {
+            // Informe aqui que a conexão caiu ou que houve algum problema
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
         }
     });
 })
@@ -88,6 +103,26 @@ $("#medicos>ul>li").eq(0).click((e) => {
 
 $("#medicos>ul>li").eq(1).click((e) => {
     e.preventDefault();
+    $("#loading").show()
+    $("header").hide()
+    $("#especialidade").remove("option")
+    if ($("#especialidade>option").length == 0) {
+        $.get(urlUsada + "/especialidades", (res) => {
+            $("#medicosForm").show()
+            for (let i = 0; i < res.length; i++) {
+                $("#especialidade").append($(`<option name="${res[i].id}">${res[i].nome}</option>`))
+                console.log(res[i].id)
+            }
+        }).done(() => {
+            $("#loading").hide()
+            $("header").show()            
+        })
+    }
+    else {
+        $("#loading").hide()
+        $("header").show()
+        $("#medicosForm").show()
+    }
 });
 
 $("#consulta").click((e) => {

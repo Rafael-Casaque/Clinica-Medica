@@ -1,4 +1,4 @@
-button {
+#menu{
     display: none;
     border: 0;
 }
@@ -54,8 +54,12 @@ aside{
     top: 55px;    
 }
 
+.close:hover{
+    color: #DC3545;
+}
+
 @media (max-width: 991px) {
-    button {
+    #menu{
         display: inline-block;
     }
 }

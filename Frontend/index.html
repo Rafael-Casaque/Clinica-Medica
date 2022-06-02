@@ -29,7 +29,7 @@
                         <path fill-rule="evenodd"
                             d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475ZM.879 8C-2.426 1.68 4.41-2 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z" />
                     </svg></h3>
-                <button class="navbar-toggle bg-black" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+                <button id="menu" class="navbar-toggle bg-black" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-list text-light" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                       </svg>
@@ -72,18 +72,18 @@
         </div>
     </header>
     <main>
-        <form class="w-50 p-3 bg-black bg-gradient text-light rounded-3" id="pacientesForm">
-
+        <form class="w-50 p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3" id="pacientesForm">            
             <div class="text-end mb-0 mt-n1">
-                <a href="#">
-                    <svg id="close" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <a href="#" class="text-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill close" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
                       </svg>
-                </a>
+                </a>                
             </div>
+            <h2 >Cadastrar novo paciente</h2>
             <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="email" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Insira o nome do paciente">
+                <label for="nomeP">Nome</label>
+                <input type="text" class="form-control" id="nomeP" placeholder="Insira o nome do paciente">
             </div>
             <div class="form-group mb-2">
                 <label for="dataNascimento">Data de nascimento</label>
@@ -91,6 +91,29 @@
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             <button type="reset" class="btn btn-secondary">Limpar</button>
+        </form>
+        <form class="w-50 p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3" id="medicosForm">            
+            <div class="text-end mb-0 mt-n1">
+                <a href="#" class="text-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill close" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                      </svg>
+                </a>                
+            </div>
+            <h2 >Cadastrar novo médico</h2>
+            <div class="form-group">
+                <label for="nomeM">Nome</label>
+                <input type="text" class="form-control" id="nomeM" placeholder="Insira o nome do médico">
+            </div>
+            <div class="form-group mb-2">
+                <label for="especialidade">Especialidade</label>
+                <select type="date" class="form-control w-75" id="especialidade">
+            </div>
+            <div class="form-group mb-2">                
+                <select>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="reset" class="btn btn-secondary">Limpar</button>            
         </form>
         <aside id="modal-sucesso" class="bg-success bg-gradient text-light p-md-3 rounded position-absolute end-0 m-lg-2">
             <span class="align-top">Operação realizada com sucesso!</span>
