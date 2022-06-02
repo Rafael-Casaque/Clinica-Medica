@@ -105,7 +105,7 @@ app.post('/pacientes',(req, res) => {       //rota para cadastramento de pacient
     fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
         if (err) throw err;
     });
-    res.sendStatus(200);    
+    res.send({"status":201});        
 })
 
 app.put('/pacientes',(req, res) => {        //rota para edição de pacientes
