@@ -2,6 +2,8 @@ var medicos, pacientes, consultas, especialidades;
 const urlUsada = "http://localhost:3000";
 //operações :hover
 
+$("#testee").show();
+
 $("a").click((e) => {
     e.preventDefault();
 })
@@ -61,7 +63,7 @@ $("#pacientesForm>.btn-primary").click((e) => {
     $("#loading").show()
     $("header").hide()
     const dados = {
-        nome: $("#nome").val(),
+        nome: $("#nomeP").val(),
         dataNascimento: $("#dataNascimento").val()
     };
     $.ajax({
@@ -75,8 +77,8 @@ $("#pacientesForm>.btn-primary").click((e) => {
                 $("header").show()
                 $("#nome").val(""),
                     $("#dataNascimento").val("")
-                $("#modal-sucesso").show();
-                setTimeout(() => { $("#modal-sucesso").hide("slow") }, 1500)
+                $("#modal-sucesso").show();                
+                setTimeout(() => { $("#modal-sucesso").fadeOut("slow")}, 1500)
             }
             else {
                 alert(1)
