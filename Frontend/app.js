@@ -1,9 +1,8 @@
-var medicos, pacientes, consultas, especialidades;
 const urlUsada = "http://localhost:3000";
 
 //eventos ajax
 
-$("#pacientes>ul>li").eq(0).click((e) => {
+$("#pacientes>ul>li").eq(0).click((e) => {    
     e.preventDefault();
     $("#loading").show()
     $("header").hide()
@@ -32,8 +31,7 @@ $("#pacientesForm>.btn-primary").click((e) => {
             if (res.status == 201) {
                 $("#loading").hide()
                 $("header").show()
-                $("#nome").val(""),
-                $("#dataNascimento").val("")
+                $("input").val('')
                 $("#modal-sucesso").show();                
                 setTimeout(() => { $("#modal-sucesso").fadeOut("slow")}, 1500)
             }            
@@ -43,12 +41,12 @@ $("#pacientesForm>.btn-primary").click((e) => {
 
 $("#medicos>ul>li").eq(0).click((e) => {
     e.preventDefault();
-    $.get(urlUsada + "/medicos", (e) => {
-        console.log(e);
+    $.get(urlUsada + "/medicos", (e) => {        
     })
 });
 
-$("#medicos>ul>li").eq(1).click((e) => {
+$("#medicos>ul>li").eq(1).click((e) => {    
+    $("form").hide()
     e.preventDefault();
     $("#loading").show()
     $("header").hide()
@@ -57,8 +55,7 @@ $("#medicos>ul>li").eq(1).click((e) => {
         $.get(urlUsada + "/especialidades", (res) => {
             $("#medicosForm").show()
             for (let i = 0; i < res.length; i++) {
-                $("#especialidade").append($(`<option name="${res[i].id}">${res[i].nome}</option>`))
-                console.log(res[i].id)
+                $("#especialidade").append($(`<option name="${res[i].id}">${res[i].nome}</option>`))                
             }
         }).done(() => {
             $("#loading").hide()
@@ -89,13 +86,39 @@ $("#medicosForm>.btn-primary").click((e) => {
             if (res.status == 201) {
                 $("#loading").hide()
                 $("header").show()
-                $("#nome").val(""),
-                $("#dataNascimento").val("")
+                $("input").val('')                
                 $("#modal-sucesso").show();                
                 setTimeout(() => { $("#modal-sucesso").fadeOut("slow")}, 1500)
             }            
         }
     });
+})
+
+$("#consulta").click((e)=>{
+    let pacientes,medicos;
+    e.preventDefault();
+    $("#loading").show()
+    $("header").hide()
+    $("form").hide();        
+    $.get(urlUsada + "/pacientes",(res)=>{
+        pacientes = res;
+    })
+    $.get(urlUsada + "/medicos",(res)=>{
+        medicos = res;
+    }).done(() => {
+        $("#loading").hide()
+        $("header").show()            
+        $("#consultaForm").show();    
+        console.log(medicos)
+        console.log(pacientes)        
+
+        for (let i = 0; i < pacientes.length; i++) {
+            $("#paciente").append($(`<option name="${pacientes[i].id}">${pacientes[i].nome}</option>`))                
+        }
+        for (let i = 0; i < medicos.length; i++) {
+            $("#medico").append($(`<option name="${medicos[i].id}">${medicos[i].nome}</option>`))                
+        }
+    })
 })
 
 //eventos de hover e ocultamento
@@ -109,6 +132,8 @@ $("#testee").show();
 $("a").click((e) => {
     e.preventDefault();
 })
+
+$("#consultaForm").hide()
 
 $("#pacientesForm").hide()
 
@@ -137,11 +162,11 @@ $("#medicos").mouseout(() => {
 });
 
 $("#pacientes>ul>li").eq(1).click((e) => {
-    e.preventDefault();
+    e.preventDefault();    
+    $("form").hide()
     $("#pacientesForm").show()
 });
 
 $(".close").click(() => {
-    $("#pacientesForm").hide()
-    $("#medicosForm").hide()
+    $("form").hide()    
 });
