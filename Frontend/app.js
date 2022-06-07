@@ -1,8 +1,10 @@
-const urlUsada = "http://localhost:3000";
+var alturaTela = parseInt($("main").css("height"));
+var larguraTela = $(document).width();
+const urlUsada = "http://192.168.15.4:3000";
 
 //eventos ajax
 
-$("#pacientes>ul>li").eq(0).click((e) => {
+$("#pacientes>ul>li").eq(0).click((e) => {    
     let pacientes;
     e.preventDefault();    
     $("#medicosLista").hide()    
@@ -36,7 +38,7 @@ $("#pacientes>ul>li").eq(0).click((e) => {
                 </td>
             </tr>`)
         }
-
+        reajusteTela("#pacientesTabela>tbody>tr");
     })
 });
 
@@ -65,7 +67,7 @@ $("#pacientesForm>.btn-primary").click((e) => {
     });
 })
 
-$("#medicos>ul>li").eq(0).click((e) => {
+$("#medicos>ul>li").eq(0).click((e) => {    
     let medicos;
     let especialidades;
     e.preventDefault();    
@@ -102,11 +104,14 @@ $("#medicos>ul>li").eq(0).click((e) => {
                 </td>
             </tr>`)
         }
-        $("#medicosLista").show()   
+        $("#medicosLista").show()               
+        reajusteTela("#medicosTabela>tbody>tr");
     })
 });
 
-$("#medicos>ul>li").eq(1).click((e) => {
+$("#medicos>ul>li").eq(1).click((e) => {            
+    $("main").css({ height: alturaTela+'px'});
+    $("main").css({ width: larguraTela+'px'});    
     $("form").hide()
     e.preventDefault();
     $("#loading").show()
@@ -129,7 +134,7 @@ $("#medicos>ul>li").eq(1).click((e) => {
         $("#loading").hide()
         $("header").show()
         $("#medicosForm").show()
-    }
+    }    
 });
 
 $("#medicosForm>.btn-primary").click((e) => {
@@ -157,57 +162,82 @@ $("#medicosForm>.btn-primary").click((e) => {
     });
 })
 
-$("#consulta").click((e) => {
+$("#consulta").click((e) => {    
+    $("main").css({ height: alturaTela+'px'});
+    $("main").css({ width: larguraTela+'px'});    
     $("#pacientesLista").hide()    
     let pacientes, medicos;
     e.preventDefault();
     $("#loading").show()
     $("header").hide()
-    $("form").hide()
-    $("#paciente").remove("option")
-    $("#medico").remove("option")
+    $("form").hide()    
+    $("#paciente>option").remove()
+    $("#medico>option").remove()    
     $.get(urlUsada + "/pacientes", (res) => {
         pacientes = res;
     })
     $.get(urlUsada + "/medicos", (res) => {
         medicos = res;
-    }).done(() => {
-        $("#loading").hide()
-        $("header").show()
-        $("#consultaForm").show();
-        console.log(medicos)
-        console.log(pacientes)
-
+    }).done(() => {        
         for (let i = 0; i < pacientes.length; i++) {
             $("#paciente").append($(`<option name="${pacientes[i].id}">${pacientes[i].nome}</option>`))
         }
         for (let i = 0; i < medicos.length; i++) {
             $("#medico").append($(`<option name="${medicos[i].id}">${medicos[i].nome}</option>`))
         }
-    })
+        $("#loading").hide()
+        $("header").show()
+        $("#consultaForm").show();        
+    })    
 })
+
+$("#consultaForm>.btn-primary").click((e) => {
+    e.preventDefault();
+    $("#loading").show()
+    $("header").hide()
+    const dados = {        
+        idPaciente: $("#paciente>option:checked").attr("name"),
+        idMedico: $("#medico>option:checked").attr("name"),
+        data: $("#dataConsulta").val() + ' ' + $("#horaConsulta").val()
+    }
+    $.ajax({
+        url: urlUsada + '/consultas',
+        type: 'POST',
+        dataType: "json",
+        data: dados,
+        success: function (res) {
+            if (res.status == 201) {
+                $("#loading").hide()
+                $("header").show()
+                $("input").val('')
+                $("#modal-sucesso").show();
+                setTimeout(() => { $("#modal-sucesso").fadeOut("slow") }, 1500)
+            }
+        }
+    });
+});
 
 //eventos de hover e ocultamento
 
 var estado = false;
 
-$("#menu").click((e) => {
+$("#menu").click((e) => {    
     estado == false ? (
         $("#navbar-links").show(),
         estado = true
     ) : (
         $("#navbar-links").hide(),
         estado = false
-    )
+    )    
 })
 
 $("#pacientesLista").hide()        
 $("#medicosLista").hide()    
 
-$("#consulta").click((e) => {
+$("#consulta").click((e) => {    
     $("#medicosLista").hide()    
     $("#pacientesLista").hide()    
-    e.preventDefault();
+    e.preventDefault();    
 });
 
 $("#testee").show();
@@ -244,16 +274,34 @@ $("#medicos").mouseout(() => {
     $(".opcoes").eq(1).hide()
 });
 
-$("#pacientes>ul>li").eq(1).click((e) => {
+$("#pacientes>ul>li").eq(1).click((e) => {    
+    $("main").css({ height: alturaTela+'px'});
+    $("main").css({ width: larguraTela+'px'});    
     $("#pacientesLista").hide()    
     $("#medicosLista").hide()    
     e.preventDefault();
     $("form").hide()
-    $("#pacientesForm").show()
+    $("#pacientesForm").show()    
 });
 
 $(".close").click(() => {
+    $("main").css({ height: alturaTela+'px'});
+    $("main").css({ width: larguraTela+'px'});    
     $("form").hide()
     $("#pacientesLista").hide()    
     $("#medicosLista").hide()    
+    console.log("arrombado")
 });
+
+function reajusteTela(endereco){    
+    $("main").css({ height: alturaTela+'px'});
+    $("main").css({ width: larguraTela+'px'});    
+    if($(endereco).length>10){
+        $("main").css({height: `${$(document).height()+200}px`})        
+        if($(document).width()>991) $("main").css({width: `${larguraTela-17}px`})                
+    }
+    else{
+        $("main").css({height: `${$(document).height()}px`})        
+        if($(document).width()>991) $("main").css({width: `${larguraTela}px`})        
+    }    
+}
