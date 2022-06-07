@@ -130,15 +130,25 @@ app.put('/pacientes',(req, res) => {        //rota para edição de pacientes
 
 app.delete('/pacientes',(req, res) => {     //rota para exclusão de pacientes
     let pacientesDB = require('./pacientes');
-    for(let i = 0; i < pacientesDB.length; i++){
-        if(pacientesDB[i].id == req.body.id){
-            pacientesDB.splice(i, 1);            
-            fs.writeFile("pacientes.json", JSON.stringify(pacientesDB), err => {
-                if (err) throw err;
-            });  
+    let consultasDB = require('./consultas');
+    let autorizado = true;
+    for(let i = 0; i < consultasDB.length; i++){
+        if(consultasDB[i].idPaciente == req.body.id){
+            autorizado = false;
+            res.send({"status":401});
         }
     }
-    res.sendStatus(200);    
+    if(autorizado==true){
+        for(let i = 0; i < pacientesDB.length; i++){
+            if(pacientesDB[i].id == req.body.id){
+                pacientesDB.splice(i, 1);            
+                fs.writeFile("pacientes.json", JSON.stringify(pacientesDB), err => {
+                    if (err) throw err;
+                });  
+            }
+        }
+        res.sendStatus(200);    
+    }    
 })
 
 //---------------------------------Rotas Médico-----------------------------------
@@ -191,15 +201,24 @@ app.put('/medicos',(req, res) => {        //rota para edição dos médicos
 
 app.delete('/medicos',(req, res) => {     //rota para exclusão dos médicos
     let medicosDB = require('./medicos');
-    for(let i = 0; i < medicosDB.length; i++){
-        if(medicosDB[i].id == req.body.id){
-            medicosDB.splice(i, 1);            
-            fs.writeFile("medicos.json", JSON.stringify(medicosDB), err => {
-                if (err) throw err;
-            });  
+    let autorizado = true;
+    for(let i = 0; i < consultasDB.length; i++){
+        if(consultasDB[i].idMedico == req.body.id){
+            autorizado = false;
+            res.send({"status":401});
         }
     }
-    res.sendStatus(200);
+    if(autorizado==true){
+        for(let i = 0; i < medicosDB.length; i++){
+            if(medicosDB[i].id == req.body.id){
+                medicosDB.splice(i, 1);            
+                fs.writeFile("medicos.json", JSON.stringify(medicosDB), err => {
+                    if (err) throw err;
+                });  
+            }
+        }
+        res.sendStatus(200);
+    }    
 })
 
 //---------------------------------Rotas Consultas-----------------------------------
@@ -227,7 +246,7 @@ app.post('/consultas',(req, res) => {       //rota para cadastramento das consul
     fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
         if (err) throw err;
     });
-    res.sendStatus(200);
+    res.send({"status":201});
 })
 
 app.put('/consultas',(req, res) => {        //rota para edição das consultas
