@@ -34,7 +34,7 @@ $("#formEM>.btn-primary").on("click", (e) => {
     const dados = {
         id: enderecoElemento.eq(0).attr("name"),
         nome: $("#eNomeM").val(),
-        idEspecialidade: $("#eEspecialidade").val()
+        idEspecialidade: $("#eEspecialidade>option:checked").attr("name")
     };
     $.ajax({
         url: urlUsada + '/medicos',
@@ -108,7 +108,6 @@ $("#pacientes>ul>li").eq(0).click((e) => {
                     $(".cancelarConsulta").click((e) => {
                         $("#loading").show();
                         $("header").hide();
-                        console.log($(e.target).parent().parent().children().attr("name"))
                         $.ajax({
                             url: urlUsada + '/consultas',
                             type: 'DELETE',
@@ -143,9 +142,9 @@ $("#pacientes>ul>li").eq(0).click((e) => {
                         setTimeout(() => { $("#modal-error").fadeOut("slow") }, 1500)
                     }
                     else {
+                        $(e.target).parent().parent().remove()
                         $("#loading").hide()
                         $("header").show()
-                        $(e.target).parent().parent().remove()
                         $("#modal-sucesso").show();
                         setTimeout(() => { $("#modal-sucesso").fadeOut("slow") }, 1500)
                     }
@@ -156,10 +155,12 @@ $("#pacientes>ul>li").eq(0).click((e) => {
         $("#pacientesTabela>tbody>tr>td>.edit").click((e) => {
             const elemento = $(e.target).parent().parent().children();
             enderecoElemento = elemento;
-            $("#formEP").show();
             $("#eNomeP").val(elemento.eq(0).html());
             $("#eDataNascimento").val(elemento.eq(1).html());
             $("body").css({ backgroundColor: "#BDBDBD" });
+            setTimeout(() => {
+                $("#formEP").show();
+            }, 100)
         })
     })
 });
@@ -206,9 +207,9 @@ $("#medicos>ul>li").eq(0).click((e) => {
         $("#medicosTabela>tbody>tr").remove()
         for (let i = 0; i < medicos.length; i++) {
             $("#medicosTabela>tbody").append(`<tr>
-                <td>${medicos[i].nome}</td>
+                <td name="${medicos[i].id}">${medicos[i].nome}</td>
                 <td>${medicos[i].dataCadastro}</td>                
-                <td>${especialidades[parseInt(medicos[i].idEspecialidade) - 1].nome}</td>
+                <td name="${medicos[i].idEspecialidade}">${especialidades[parseInt(medicos[i].idEspecialidade) - 1].nome}</td>
                 <td>
                     <button class="btn btn-success cons"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye m-lg-1" viewBox="0 0 16 16">
                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
@@ -225,6 +226,46 @@ $("#medicos>ul>li").eq(0).click((e) => {
             </tr>`)
         }
         $("#medicosLista").show()
+
+        $("#medicosTabela>tbody>tr>td>.cons").click((e) => {
+            $("#consultasTabela>tbody>tr").remove();
+            const elemento = $(e.target).parent().parent().children().eq(0);
+            $("#verConsultas").show();
+            $.get(urlUsada + "/consultas", (res) => {
+                for (let i = 0; i < res.length; i++) {
+                    if (res[i].idMedico == elemento.attr("name")) {
+                        $.get(urlUsada + "/pacientes", (resP) => {
+                            for (let j = 0; j < resP.length; j++) {
+                                if (res[i].idPaciente == resP[j].id) {
+                                    $("#consultasTabela>tbody").append(`<tr><td name="${res[i].id}">${elemento.html()}</td><td>${resP[j].nome}</td><td>${res[i].data}</td><td><button class="btn btn-danger cancelarConsulta">Cancelar</button></td></tr>`)
+                                }
+                            }
+                        })
+                    }
+                }
+            }).done(() => {
+                setTimeout(() => {
+                    $(".cancelarConsulta").click((e) => {
+                        $("#loading").show();
+                        $("header").hide();
+                        $.ajax({
+                            url: urlUsada + '/consultas',
+                            type: 'DELETE',
+                            dataType: "json",
+                            data: { id: $(e.target).parent().parent().children().attr("name") },
+                            success: () => {
+                                $("#loading").hide()
+                                $("header").show()
+                                $(e.target).parent().parent().remove()
+                                $("#modal-sucesso").show();
+                                setTimeout(() => { $("#modal-sucesso").fadeOut("slow") }, 1500)
+                            }
+                        })
+                    })
+                }, 500)
+            })
+        })
+
         $("#medicosTabela>tbody>tr>td>.del").click((e) => {
             $("#loading").show();
             $("header").hide();
@@ -241,9 +282,9 @@ $("#medicos>ul>li").eq(0).click((e) => {
                         setTimeout(() => { $("#modal-error").fadeOut("slow") }, 1500)
                     }
                     else {
+                        $(e.target).parent().parent().remove()
                         $("#loading").hide()
                         $("header").show()
-                        $(e.target).parent().parent().remove()
                         $("#modal-sucesso").show();
                         setTimeout(() => { $("#modal-sucesso").fadeOut("slow") }, 1500)
                     }
@@ -252,12 +293,30 @@ $("#medicos>ul>li").eq(0).click((e) => {
         })
 
         $("#medicosTabela>tbody>tr>td>.edit").click((e) => {
-            console.log("121")
             const elemento = $(e.target).parent().parent().children();
             enderecoElemento = elemento;
-            $("#formEM").show();
-            $("#eNomeM").val(elemento.eq(0).html());
-            $("#eEspecialidade").val(elemento.eq(1).html());
+            if ($("#eEspecialidade>option").length == 0) {
+                $.get(urlUsada + "/especialidades", (res) => {
+                    for (let i = 0; i < res.length; i++) {
+                        $("#eEspecialidade").append($(`<option name="${res[i].id}">${res[i].nome}</option>`))
+                    }
+                }).done(() => {
+                    $("#eNomeM").val(elemento.eq(0).html());
+                    $("#loading").hide()
+                    $("header").show()
+                    setTimeout(() => {
+                        $("#formEM").show();
+                    }, 100)
+                })
+            }
+            else {
+                $("#eNomeM").val(elemento.eq(0).html());
+                $("#loading").hide()
+                $("header").show()
+                setTimeout(() => {
+                    $("#formEM").show();
+                }, 100)
+            }
             $("body").css({ backgroundColor: "#BDBDBD" });
         })
     })
@@ -341,26 +400,34 @@ $("#consulta").click((e) => {
 
 $("#consultaForm>.btn-primary").click((e) => {
     e.preventDefault();
-    $("#loading").show()
-    $("header").hide()
-    const dados = {
-        idPaciente: $("#paciente>option:checked").attr("name"),
-        idMedico: $("#medico>option:checked").attr("name"),
-        data: $("#dataConsulta").val() + ' ' + $("#horaConsulta").val()
+    if (Date.parse($("#dataConsulta").val() + ' ' + $("#horaConsulta").val()) - Date.now() < 0) {
+        $("#modal-error2").show();
+        setTimeout(() => { $("#modal-error2").fadeOut("slow") }, 1500)
     }
-    $.ajax({
-        url: urlUsada + '/consultas',
-        type: 'POST',
-        dataType: "json",
-        data: dados,
-        success: () => {
-            $("#loading").hide()
-            $("header").show()
-            $("input").val('')
-            $("#modal-sucesso").show();
-            setTimeout(() => { $("#modal-sucesso").fadeOut("slow") }, 1500)
+    else {
+        dataAtual = Date.now()
+        console.log(dataAtual - $("#dataConsulta").val())        
+        $("#loading").show()
+        $("header").hide()
+        const dados = {
+            idPaciente: $("#paciente>option:checked").attr("name"),
+            idMedico: $("#medico>option:checked").attr("name"),
+            data: $("#dataConsulta").val() + ' ' + $("#horaConsulta").val()
         }
-    });
+        $.ajax({
+            url: urlUsada + '/consultas',
+            type: 'POST',
+            dataType: "json",
+            data: dados,
+            success: () => {
+                $("#loading").hide()
+                $("header").show()
+                $("input").val('')
+                $("#modal-sucesso").show();
+                setTimeout(() => { $("#modal-sucesso").fadeOut("slow") }, 1500)
+            }
+        });
+    }
 });
 
 //eventos de hover e ocultamento
@@ -447,4 +514,9 @@ $(".closeE").click(() => {
     $("#formEM").hide()
     $("body").css({ backgroundColor: "white" });
     $("#pacientes>ul>li").eq(0).trigger("click");
+});
+
+$(".closeEM").click(() => {
+    $("#formEM").hide()
+    $("body").css({ backgroundColor: "white" });
 });
