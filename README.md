@@ -1,1 +1,9 @@
 # Clinica-Medica
+
+O requisito principal para funcionamento é ter o Node.js instalado.
+
+Após isso, para utilizar o app é necessário executar a função "node .\index.js" 
+dentro da pasta "Clinica-Medica\Backend" para ativar a escuta do servidor.
+
+Essas intervenções fizeram-se necessárias por conta dos grandes problemas com o
+meu site de hospedagem de funções.
