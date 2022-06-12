@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -9,31 +8,37 @@
     <title>Clinica Médica</title>
     <link rel="shortcut icon" href="imgs/ico.jpg">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="app.js" defer></script>
 </head>
 
 <body>
-    <div class="fullscreen text-light" id="loading">
-        <span class="m-lg-2">Loading...</span>
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
     <header>
         <div class="container" id="nav-container">
             <nav class="navbar navbar-expand-lg fixed-top bg-black">
-                <h3 class="text-light mt-0" id="clinica">Clinica Médica <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-pulse-fill align-middle" viewBox="0 0 16 16">
+                <h3 class="text-light mt-0" id="clinica">Clinica Médica <svg xmlns="http://www.w3.org/2000/svg"
+                        width="30" height="30" fill="currentColor" class="bi bi-heart-pulse-fill align-middle"
+                        viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                             d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475ZM.879 8C-2.426 1.68 4.41-2 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z" />
                     </svg></h3>
-                <button id="menu" class="navbar-toggle bg-black" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-list text-light" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                      </svg>
+                <button id="menu" class="navbar-toggle bg-black" type="button" data-toggle="collapse"
+                    data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                        class="bi bi-list text-light" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
                     <div class="navbar-nav">
@@ -71,17 +76,50 @@
                 </div>
             </nav>
         </div>
-    </header>
-    <main>
-        <form class="tamaho p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3" id="pacientesForm">            
+    </header>        
+    <main style="margin-top: 56px">
+        <div class="fullscreen text-light" id="loading">
+            <span class="m-lg-2">Loading...</span>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="Fullscreen text-light" id="verConsultas">
+            <div id="consultasLista" class="container text-center bg-body bg-opacity-50 rounded-2 text-light">
+                <div class="text-end mb-0 mt-n1">
+                    <a href="#" class="text-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-x-circle-fill closeC text-danger" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                        </svg>
+                    </a>
+                </div>
+                <h2 class="text-muted fw-bolder" style="text-shadow: 1px 1px 1px #000000">Consultas</h2>
+                <table id="consultasTabela" class="container bg-dark bg-opacity-25 text-black">
+                    <thead class="h5">
+                        <tr>
+                            <th>Médico</th>
+                            <th>Paciente</th>
+                            <th>Data</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody class="h5 text-black"></tbody>
+                </table>
+            </div>
+        </div>    
+        <form class="tamaho p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3" id="pacientesForm">
             <div class="text-end mb-0 mt-n1">
                 <a href="#" class="text-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill close" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                      </svg>
-                </a>                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-x-circle-fill close text-danger" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                    </svg>
+                </a>
             </div>
-            <h2 >Cadastrar novo paciente</h2>
+            <h2>Cadastrar novo paciente</h2>
             <div class="form-group">
                 <label for="nomeP">Nome</label>
                 <input type="text" class="form-control" id="nomeP" placeholder="Insira o nome do paciente">
@@ -93,6 +131,53 @@
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             <button type="reset" class="btn btn-secondary">Limpar</button>
         </form>
+        
+            <form class="tamaho p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3 position-absolute" id="formEP">
+                <div class="text-end mb-0 mt-n1">
+                    <a href="#" class="text-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-x-circle-fill closeE text-danger" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                        </svg>
+                    </a>
+                </div>
+                <h2>Editar paciente</h2>
+                <div class="form-group">
+                    <label for="eNomeP">Nome</label>
+                    <input type="text" class="form-control" id="eNomeP" placeholder="Insira o nome do paciente">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="eDataNascimento">Data de nascimento</label>
+                    <input type="date" class="form-control" id="eDataNascimento">
+                </div>
+                <button type="submit" class="btn btn-primary">Editar</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+            </form>        
+                
+            <form class="tamaho p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3 position-absolute" id="formEM">
+                <div class="text-end mb-0 mt-n1">
+                    <a href="#" class="text-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-x-circle-fill close text-danger" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                        </svg>
+                    </a>
+                </div>
+                <h2>Editar médico</h2>
+                <div class="form-group">
+                    <label for="nomeM">Nome</label>
+                    <input type="text" class="form-control" id="nomeME" placeholder="Insira o nome do médico">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="especialidade">Especialidade</label>
+                    <select class="form-group mb-2 form-select" id="eEspecialidade"></select>
+                </div>
+                <button type="submit" class="btn btn-primary">Editar</button>
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+            </form>        
+
         <form class="tamaho p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3" id="medicosForm">            
             <div class="text-end mb-0 mt-n1">
                 <a href="#" class="text-light">
@@ -113,24 +198,26 @@
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             <button type="reset" class="btn btn-secondary">Limpar</button>            
         </form>
-        
-        <form class="tamaho p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3" id="consultaForm">            
+
+        <form class="tamaho p-3 bg-dark bg-opacity-75 bg-gradient text-white rounded-3" id="consultaForm">
             <div class="text-end mb-0 mt-n1">
                 <a href="#" class="text-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill close" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                      </svg>
-                </a>                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-x-circle-fill close text-danger" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                    </svg>
+                </a>
             </div>
-            <h2 >Cadastrar nova consulta</h2>
+            <h2>Cadastrar nova consulta</h2>
             <div class="form-group">
-                <label for="medico">Médico</label>                
-                <select class="form-group mb-2 form-select" id="medico"></select>                
+                <label for="medico">Médico</label>
+                <select class="form-group mb-2 form-select" id="medico"></select>
             </div>
             <div class="form-group mb-2">
                 <label for="paciente">Paciente</label>
-                <select class="form-group mb-2 form-select" id="paciente"></select>                
-            </div>            
+                <select class="form-group mb-2 form-select" id="paciente"></select>
+            </div>
             <div class="form-group mb-2">
                 <label for="dataConsulta">Data da consulta</label>
                 <input type="date" class="form-control" id="dataConsulta">
@@ -140,26 +227,28 @@
                 <input type="time" class="form-control" id="horaConsulta">
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
-            <button type="reset" class="btn btn-secondary">Limpar</button>            
-        </form>        
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+        </form>
 
-        <div id="pacientesLista" class="container text-center bg-body bg-opacity-50 rounded-2 text-light">
+        <div id="pacientesLista" class="container text-center bg-dark bg-opacity-25 rounded-2 text-light">
             <div class="text-end mb-0 mt-n1">
                 <a href="#" class="text-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill close" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                      </svg>
-                </a>                
-            </div>
-            <h2 class="text-muted fw-bolder" style="text-shadow: 1px 1px 1px #000000">Lista de Pacientes</h2>
-            <table id="pacientesTabela" class="container bg-dark bg-opacity-25 text-black">                        
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-x-circle-fill close text-danger" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                    </svg>
+                </a>
+            </div>        
+            <h2 class="text-light fw-bolder" style="text-shadow: 1px 1px 1px #000000">Lista de Pacientes</h2>
+            <table id="pacientesTabela" class="container bg-dark bg-opacity-25 text-black">            
                 <thead class="h5">
                     <tr>
                         <th>Nome</th>
                         <th>Data de nascimento</th>
                         <th>Data de Cadastro</th>
                         <th>Ações</th>
-                    </tr>                
+                    </tr>
                 </thead>
                 <tbody class="h5 text-black"></tbody>
             </table>
@@ -168,35 +257,43 @@
         <div id="medicosLista" class="container text-center bg-dark bg-opacity-25 rounded-2 text-light">
             <div class="text-end mb-0 mt-n1">
                 <a href="#" class="text-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill close" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                      </svg>
-                </a>                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-x-circle-fill close text-danger" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                    </svg>
+                </a>
             </div>
             <h2 class="text-light fw-bolder" style="text-shadow: 1px 1px 1px #000000">Lista de Médicos</h2>
-            <table id="medicosTabela" class="container bg-dark bg-opacity-25 text-black">                        
+            <table id="medicosTabela" class="container bg-dark bg-opacity-25 text-black">
                 <thead class="h5">
                     <tr>
-                        <th>Nome</th>                        
+                        <th>Nome</th>
                         <th>Data de Cadastro</th>
                         <th>Especialidade</th>
                         <th>Ações</th>
-                    </tr>                
+                    </tr>
                 </thead>
                 <tbody class="h5 text-light" style="text-shadow: 1px 1px 1px #000000"></tbody>
             </table>
         </div>
 
-        <aside id="modal-sucesso" class="bg-success bg-gradient text-light p-md-3 rounded position-absolute end-0 m-lg-2">
+        <aside id="modal-sucesso"
+            class="bg-success bg-gradient text-light p-md-3 rounded position-absolute end-0 m-lg-2">
             <span class="align-top">Operação realizada com sucesso!</span>
         </aside>
-        
-        
+
+        <aside id="modal-error"
+            class="bg-danger bg-gradient text-light p-md-3 rounded position-absolute end-0 m-lg-2">
+            <span class="align-top">Essa pessoa ainda tem consultas!</span>
+        </aside>
+
+
 
     </main>
-    <footer class="text-light bg-black text-md-center">
+    <!-- <footer class="text-light bg-black text-md-center">
         <p>Desenvolvido por Rafael Casaque - 2022 &copy;</p>
-    </footer>
+    </footer> -->
 </body>
 
 </html>

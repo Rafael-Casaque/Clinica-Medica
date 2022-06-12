@@ -19,6 +19,17 @@
     align-items: center;
 }
 
+.Fullscreen {
+    background-color: rgba(20, 20, 20, 0.4);
+    position: absolute;
+    top: 0px;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .opcoes {
     width: 100px;
     position: absolute;
@@ -31,16 +42,15 @@
     font-weight: bold;
 }
 
-main {
-    background-image: url(imgs/wallpaper.jpg);
+main {    
     background-size: auto;
-    background-position: center;
-    height: 100vh;
-    width: 100vw;
+    background-position: center;    
+    height: calc(100vh - 56px);    
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    padding-top: -50px;
 }
 
 footer {
@@ -56,7 +66,9 @@ aside{
 }
 
 .close:hover{
-    color: #DC3545;
+    background-color: white;
+    border-radius: 50%;
+    color: #fa7481;
 }
 
 .tamaho{
@@ -66,17 +78,29 @@ aside{
 table{
     width: 70%;
     text-align: center;
-    border: 1px solid black;    
 }
 
 thead>tr>th{
     width: 20%;
     text-align: center;
     border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.185);        
 }
 
 thead>tr>th:last-child{
     width: 40%;
+}
+
+tbody>tr{
+    border-top: 1px solid gray;    
+}
+
+tbody>tr>td{
+    padding: 7px 0 7px 0;
+}
+
+#consultasTabela>thead>tr>th{
+    width: 25%;
 }
 
 .flex-container {
@@ -87,6 +111,11 @@ thead>tr>th:last-child{
     align-content: flex-start;
     align-items: center;    
   }
+
+.teste{
+    height: 500px;
+    background-color: gray;
+}
 
 @media (max-width: 991px) and (min-width: 768px){
     #menu{
