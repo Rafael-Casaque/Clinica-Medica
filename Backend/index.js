@@ -104,8 +104,11 @@ app.post('/pacientes',(req, res) => {       //rota para cadastramento de pacient
     });
     fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
         if (err) throw err;
-    });
-    res.send({"status":201});        
+    });    
+    res.send({
+        "status": "OK",
+        "msg": "Paciente cadastrado com sucesso"
+    });            
 })
 
 app.put('/pacientes',(req, res) => {        //rota para edição de pacientes
@@ -125,7 +128,10 @@ app.put('/pacientes',(req, res) => {        //rota para edição de pacientes
             });  
         }
     }
-    res.sendStatus(200);    
+    res.send({
+        "status": "OK",
+        "msg": "Paciente editado com sucesso"
+    });       
 })
 
 app.delete('/pacientes',(req, res) => {     //rota para exclusão de pacientes
@@ -135,7 +141,7 @@ app.delete('/pacientes',(req, res) => {     //rota para exclusão de pacientes
     for(let i = 0; i < consultasDB.length; i++){
         if(consultasDB[i].idPaciente == req.body.id){
             autorizado = false;
-            res.send({"status":401});
+            res.send({"status":500});        
         }
     }
     if(autorizado==true){
@@ -147,7 +153,10 @@ app.delete('/pacientes',(req, res) => {     //rota para exclusão de pacientes
                 });  
             }
         }
-        res.sendStatus(200);    
+        res.send({
+            "status": "OK",
+            "msg": "Paciente deletado com sucesso"
+        });       
     }    
 })
 
@@ -176,7 +185,10 @@ app.post('/medicos',(req, res) => {       //rota para cadastramento dos médicos
     fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
         if (err) throw err;
     });
-    res.send({"status":201});        
+    res.send({
+        "status": "OK",
+        "msg": "Medico cadastrado com sucesso"
+    });              
 })
 
 app.put('/medicos',(req, res) => {        //rota para edição dos médicos
@@ -196,16 +208,20 @@ app.put('/medicos',(req, res) => {        //rota para edição dos médicos
             });  
         }
     }
-    res.sendStatus(200);
+    res.send({
+        "status": "OK",
+        "msg": "Medico editado com sucesso"
+    });       
 })
 
 app.delete('/medicos',(req, res) => {     //rota para exclusão dos médicos
     let medicosDB = require('./medicos');
+    let consultasDB = require('./consultas');
     let autorizado = true;
     for(let i = 0; i < consultasDB.length; i++){
         if(consultasDB[i].idMedico == req.body.id){
-            autorizado = false;
-            res.send({"status":401});
+            autorizado = false;            
+            res.send({"status":500});        
         }
     }
     if(autorizado==true){
@@ -217,7 +233,10 @@ app.delete('/medicos',(req, res) => {     //rota para exclusão dos médicos
                 });  
             }
         }
-        res.sendStatus(200);
+        res.send({
+            "status": "OK",
+            "msg": "Medico deletado com sucesso"
+        });       
     }    
 })
 
@@ -246,7 +265,10 @@ app.post('/consultas',(req, res) => {       //rota para cadastramento das consul
     fs.writeFile("ultimoID.json", JSON.stringify(ultimoID), err => {
         if (err) throw err;
     });
-    res.send({"status":201});
+    res.send({
+        "status": "OK",
+        "msg": "Consulta cadastrada com sucesso"
+    });       
 })
 
 app.put('/consultas',(req, res) => {        //rota para edição das consultas
@@ -266,7 +288,10 @@ app.put('/consultas',(req, res) => {        //rota para edição das consultas
             });  
         }
     }
-    res.sendStatus(200);
+    res.send({
+        "status": "OK",
+        "msg": "Consulta editada com sucesso"
+    });       
 })
 
 app.delete('/consultas',(req, res) => {     //rota para exclusão das consultas
@@ -279,7 +304,10 @@ app.delete('/consultas',(req, res) => {     //rota para exclusão das consultas
             });  
         }
     }
-    res.sendStatus(200);
+    res.send({
+        "status": "OK",
+        "msg": "Consulta excluída com sucesso"
+    });       
 })
 
 //--------------------------------Rotas Especialidades----------------------------------
